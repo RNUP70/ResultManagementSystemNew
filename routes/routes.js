@@ -1,6 +1,7 @@
 const express = require("express")
 const router = express.Router();
 const result = require('../models/result');
+const dayjs = require('dayjs');
 
 
 //Home route (get all results data from db)
@@ -36,9 +37,6 @@ router.post('/add',(req,res)=>{
     resultRequest.save((err)=>{
         if(err)
         {
-            console.log(resultRequest.rollnumber);
-            console.log(resultRequest.name);
-            console.log(resultRequest);
             // res.json({message:err.message, type: 'danger'});
             req.session.message = {
                 type:'danger',
@@ -73,6 +71,17 @@ router.get('/edit/:id',(req,res)=>{
             res.redirect('/');
         }
         else{
+            let date = dayjs(result.dateofbirth);
+            // console.log(date.format("YYYY-MM-DD"));
+            let editResultModel = {
+                _id: result._id,
+                name: result.name,
+                dateofbirth:date.format("YYYY-MM-DD"),
+                score:result.score,
+                rollnumber:result.rollnumber
+            }
+            console.log(editResultModel);
+            
             if(result === null || result === undefined)
             {
                 req.session.message = {
@@ -84,7 +93,7 @@ router.get('/edit/:id',(req,res)=>{
             else
             {
                 res.render('edit_result',{
-                    result:result
+                    result:editResultModel
                 })
             }
         }
