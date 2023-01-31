@@ -1,0 +1,46 @@
+<%- include('layout/header') %>
+<div class="container">
+<div class="row">
+<div class="col-lg-6 mx-auto mt-4">
+  <% if (message) { %>
+    <div class="alert alert-dismissible fade show alert-<%= message.type %>" role = "alert" ">
+      <button class="btn-close" type="button" data-bs-dismiss = "alert" aria-lable = "Close"></button>
+      <strong><%= message.message %> </strong>
+    </div>
+  <% } %>
+    <div class="card shadow ">
+        <div class="card-header bg-dark text-center">
+          <h4 class="text-light">Edit Result</h4>
+        </div>
+        <div class="card-body p-4">
+          <form action="/edit/<%= result._id %> " method="post" id="add-form">
+            <div class="mb-3">
+                <label for="rollnumber">Roll No.</label>
+                <input type="number" name="rollnumber" value="<%= result.rollnumber %>" id="" class="form-control form-control-lg" 
+                placeholder="Enter Roll Number" required>
+            </div>
+            <div class="mb-3">
+                <label for="name">Name</label>
+                <input type="string" name="name" value="<%= result.name %>" id="" class="form-control form-control-lg" 
+                placeholder="Enter Name" required>
+            </div>
+            <div class="mb-3">
+                <label for="dateofbirth">Date of Birth</label>
+                <input type="date" name="dateofbirth" value="<%= result.dateofbirth %>"id="" class="form-control form-control-lg" 
+                placeholder="Enter dob" required>
+            </div>
+            <div class="mb-3">
+                <label for="score">Score</label>
+                <input type="number" name="score" id=""  value="<%= result.score %>" class="form-control form-control-lg" 
+                placeholder="Enter Score" required>
+            </div>
+            <div class="mb-3 d-grid">
+               <input type="submit" value="Update Result" name="submit" class="btn btn-primary btn-lg">
+            </div>
+          </form>
+        </div>
+      </div>
+</div>
+</div>
+</div>
+<%- include('layout/footer') %>  
