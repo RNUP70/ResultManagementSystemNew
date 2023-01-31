@@ -13,9 +13,21 @@ router.get("/",(req,res)=>{
         }
         else
         {
+            
+            let data = [];
+            results.forEach((result)=>{
+                let date = dayjs(result.dateofbirth);
+                 data.push({
+                    _id:result._id,
+                    rollnumber: result.rollnumber,
+                    name:result.name,
+                    dateofbirth:date.format("YYYY-MM-DD"),
+                    score:result.score
+                 });
+            });
             res.render("home",{
-                results:results
-               })
+                results:data
+               });
         }
     })
  
