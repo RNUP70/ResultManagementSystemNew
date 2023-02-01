@@ -5,7 +5,7 @@ const dayjs = require('dayjs');
 
 
 //Home route (get all results data from db)
-router.get("/",(req,res)=>{
+router.get("/home",(req,res)=>{
     result.find().exec((err,results)=>{
         if(err)
         {
@@ -54,7 +54,7 @@ router.post('/add',(req,res)=>{
                 type:'danger',
                 message: err.message
             }
-            res.redirect('/');
+            res.redirect('/home');
         }
         else{
            req.session.message = {
@@ -62,7 +62,7 @@ router.post('/add',(req,res)=>{
             message:'Result Saved Successfully!'
            }
            //redirect user to home page
-           res.redirect('/');
+           res.redirect('/home');
         }
     })
     
@@ -80,7 +80,7 @@ router.get('/edit/:id',(req,res)=>{
                 type:'danger',
                 message: err.message
             }
-            res.redirect('/');
+            res.redirect('/home');
         }
         else{
             let date = dayjs(result.dateofbirth);
@@ -100,7 +100,7 @@ router.get('/edit/:id',(req,res)=>{
                     type:'danger',
                     message: 'No record is find with this id'
                 }
-                res.redirect('/');
+                res.redirect('/home');
             }
             else
             {
@@ -128,7 +128,7 @@ router.post('/edit/:id',(req,res)=>{
                 type:'danger',
                 message: err.message
             }
-            res.redirect('/');
+            res.redirect('/home');
         }
         else{
             req.session.message = {
@@ -136,7 +136,7 @@ router.post('/edit/:id',(req,res)=>{
                 message:'Result Updated Successfully!'
                }
                //redirect user to home page
-               res.redirect('/');
+               res.redirect('/home');
         }
       })
 });
@@ -152,7 +152,7 @@ router.get('/delete/:id',(req,res)=>{
                 type:'danger',
                 message: err.message
             }
-            res.redirect('/');
+            res.redirect('/home');
            }
            else
            {
@@ -161,7 +161,7 @@ router.get('/delete/:id',(req,res)=>{
                 message:'Result Deleted Successfully!'
                }
                //redirect user to home page
-               res.redirect('/');
+               res.redirect('/home');
            }
     });
 
